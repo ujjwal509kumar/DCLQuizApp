@@ -32,7 +32,7 @@ export function Navbar() {
                     <ModeToggle />
 
                     <SignedOut>
-                        <SignInButton mode="modal">
+                        <SignInButton mode="modal" forceRedirectUrl="/Quiz">
                             <Button>Sign In</Button>
                         </SignInButton>
                     </SignedOut>

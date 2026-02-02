@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { SignInButton, SignedIn, SignedOut } from "@clerk/clerk-react"
 import { Brain, Clock, Trophy, ArrowRight, Zap, CheckCircle2 } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 export function LandingPage() {
+    const navigate = useNavigate()
     return (
         <div className="relative min-h-screen bg-background text-foreground overflow-hidden">
 
@@ -33,7 +35,7 @@ export function LandingPage() {
 
                     <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
                         <SignedOut>
-                            <SignInButton mode="modal">
+                            <SignInButton mode="modal" forceRedirectUrl="/quiz">
                                 <Button size="xl" className="h-14 px-8 text-lg rounded-full shadow-lg shadow-primary/20 transition-transform hover:scale-105">
                                     Get Started
                                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -45,7 +47,11 @@ export function LandingPage() {
                         </SignedOut>
 
                         <SignedIn>
-                            <Button size="xl" className="h-14 px-10 text-lg rounded-full shadow-lg shadow-primary/20">
+                            <Button
+                                size="xl"
+                                className="h-14 px-10 text-lg rounded-full shadow-lg shadow-primary/20"
+                                onClick={() => navigate('/quiz')}
+                            >
                                 Jump Back In <ArrowRight className="ml-2 h-5 w-5" />
                             </Button>
                         </SignedIn>
@@ -82,7 +88,7 @@ export function LandingPage() {
                                 title: "Instant Analytics",
                                 desc: "Get a detailed breakdown of your strengths and weaknesses instantly.",
                             },
-                        ].map((item, i) => (
+                        ].map((item, index) => (
                             <Card
                                 key={item.title}
                                 className="group relative border-muted/60 bg-linear-to-b from-background to-muted/20 transition-all hover:border-primary/50 hover:shadow-md"
@@ -136,33 +142,31 @@ export function LandingPage() {
                 </section>
 
                 {/* CTA SECTION */}
-                <SignedOut>
-                    <section className="relative overflow-hidden rounded-3xl bg-primary px-6 py-20 text-center text-primary-foreground shadow-2xl">
-                        {/* Decorative circles */}
-                        <div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
-                        <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
+                <section className="relative overflow-hidden rounded-3xl bg-primary px-6 py-20 text-center text-primary-foreground shadow-2xl">
+                    {/* Decorative circles */}
+                    <div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
+                    <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
 
-                        <div className="relative z-10 space-y-8">
-                            <h2 className="text-3xl font-bold md:text-5xl">
-                                Ready to prove your smarts?
-                            </h2>
-                            <p className="mx-auto max-w-lg text-primary-foreground/80 text-lg">
-                                Join thousands of quiz enthusiasts and start climbing the leaderboard today.
-                            </p>
+                    <div className="relative z-10 space-y-8">
+                        <h2 className="text-3xl font-bold md:text-5xl">
+                            Ready to prove your smarts?
+                        </h2>
+                        <p className="mx-auto max-w-lg text-primary-foreground/80 text-lg">
+                            Join thousands of quiz enthusiasts and start climbing the leaderboard today.
+                        </p>
 
-                            <SignInButton mode="modal">
-                                <Button size="lg" variant="secondary" className="h-12 px-8 font-semibold text-primary shadow-lg hover:bg-white/90">
-                                    Start Quizzing Now
-                                </Button>
-                            </SignInButton>
+                        <SignInButton mode="modal" forceRedirectUrl="/quiz">
+                            <Button size="lg" variant="secondary" className="h-12 px-8 font-semibold text-primary shadow-lg hover:bg-white/90">
+                                Start Quizzing Now
+                            </Button>
+                        </SignInButton>
 
-                            <div className="flex justify-center gap-8 pt-4 text-sm font-medium text-primary-foreground/60">
-                                <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> No credit card</div>
-                                <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> Free forever</div>
-                            </div>
+                        <div className="flex justify-center gap-8 pt-4 text-sm font-medium text-primary-foreground/60">
+                            <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> No credit card</div>
+                            <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> Free forever</div>
                         </div>
-                    </section>
-                </SignedOut>
+                    </div>
+                </section>
 
                 {/* FOOTER SPACER */}
                 <div className="h-12"></div>

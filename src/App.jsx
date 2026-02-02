@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from "@/components/theme-provider"
 import { Navbar } from './components/Navbar'
 import { LandingPage } from './components/LandingPage'
+import { QuizPage } from './components/QuizPage'
+import { ProtectedRoute } from './components/ProtectedRoute'
 import './App.css'
 
 function App() {
@@ -12,10 +14,8 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            {/* Add more routes here as you build more pages */}
-            {/* <Route path="/quiz" element={<QuizPage />} /> */}
-            {/* <Route path="/leaderboard" element={<Leaderboard />} /> */}
-            {/* <Route path="/about" element={<About />} /> */}
+            <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
+            
           </Routes>
         </div>
       </Router>
