@@ -146,7 +146,7 @@ export function QuizPage() {
 
         // 2. Save to Backend API
         try {
-            const response = await fetch('http://localhost:5000/api/scores', {
+            const response = await fetch('https://dcl-quiz-app-backend.vercel.app/api/scores', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

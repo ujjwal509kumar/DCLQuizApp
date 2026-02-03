@@ -36,7 +36,7 @@ export function LeaderboardPage() {
         const fetchLeaderboard = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get("http://localhost:5000/api/scores")
+                const response = await axios.get("https://dcl-quiz-app-backend.vercel.app/api/scores")
                 // Sort high to low
                 const sortedData = response.data.sort((a, b) => b.score - a.score)
                 setLeaderboardData(sortedData)
