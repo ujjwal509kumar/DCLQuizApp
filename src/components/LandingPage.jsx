@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { SignInButton, SignedIn, SignedOut } from "@clerk/clerk-react"
 import { Brain, Clock, Trophy, ArrowRight, Zap, CheckCircle2 } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 export function LandingPage() {
     const navigate = useNavigate()
@@ -41,9 +41,10 @@ export function LandingPage() {
                                     <ArrowRight className="ml-2 h-5 w-5" />
                                 </Button>
                             </SignInButton>
-                            <Button size="xl" variant="outline" className="h-14 px-8 text-lg rounded-full">
+                            <Link to={'/leaderboard'}><Button size="xl" variant="outline" className="h-14 px-8 text-lg rounded-full">
                                 View Leaderboard
                             </Button>
+                            </Link>
                         </SignedOut>
 
                         <SignedIn>
