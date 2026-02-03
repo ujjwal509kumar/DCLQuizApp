@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Navbar } from './components/Navbar'
 import { LandingPage } from './components/LandingPage'
 import { QuizPage } from './components/QuizPage'
+import { LeaderboardProtected } from './components/LeaderboardProtected'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import './App.css'
 
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
+            <Route path="/leaderboard" element={<LeaderboardProtected />} />
           </Routes>
         </div>
       </Router>

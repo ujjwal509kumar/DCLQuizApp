@@ -129,13 +129,14 @@ export function QuizPage() {
         }, 1500);
     };
 
-    // --- 3. FINISH & SAVE (Using LocalStorage) ---
-    const finishGame = (finalScore) => {
+    // --- 3. FINISH & SAVE (Using Backend API) ---
+    const finishGame = async (finalScore) => {
         setGameState('finished');
 
         // 1. Create the score object
         const newResult = {
-            name: user?.firstName || "Anonymous",
+            name: user?.firstName || "NO name given",
+            email: user?.primaryEmailAddress?.emailAddress || "no email provided",
             score: finalScore,
             total: questions.length,
             category: questions[0].category,
@@ -143,18 +144,22 @@ export function QuizPage() {
             time: new Date().toLocaleTimeString()
         };
 
-        // 2. Save to Local Storage
+        // 2. Save to Backend API
         try {
-            // Get existing scores (or empty array if none exist)
-            const savedScores = localStorage.getItem('quizScores');
-            const scoresArray = savedScores ? JSON.parse(savedScores) : [];
+            const response = await fetch('http://localhost:5000/api/scores', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newResult)
+            });
 
-            // Add new score to list
-            scoresArray.push(newResult);
-
-            // Save back to browser
-            localStorage.setItem('quizScores', JSON.stringify(scoresArray));
-
+            if (response.ok) {
+                const result = await response.json();
+                console.log("Score saved to MongoDB:", result);
+            } else {
+                console.error("Failed to save score to backend");
+            }
         } catch (error) {
             console.error("Could not save score:", error);
         }

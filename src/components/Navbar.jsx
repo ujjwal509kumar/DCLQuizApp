@@ -42,7 +42,6 @@ export function Navbar() {
                 {/* DESKTOP MENU (Hidden on Mobile) */}
                 <div className="hidden md:flex items-center gap-2">
                     <NavLinks />
-
                     <div className="flex items-center gap-2 ml-4 border-l pl-4">
                         <ModeToggle />
                         <SignedIn>
