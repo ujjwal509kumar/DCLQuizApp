@@ -278,10 +278,10 @@ export function QuizPage() {
                     </p>
                     <div className="grid grid-cols-2 gap-4">
                         <Button variant="outline" size="lg" onClick={() => { setGameState('menu'); setScore(0); }}>
-                            <RefreshCcw className="mr-2 h-4 w-4" /> Play Again
+                            <RefreshCcw className="mr-2 h-4 w-4" /> New Topic
                         </Button>
-                        <Button size="lg" onClick={() => window.location.reload()}>
-                            <ArrowRight className="mr-2 h-4 w-4" /> New Topic
+                        <Button size="lg" onClick={() => window.location.href = '/leaderboard'}>
+                            <ArrowRight className="mr-2 h-4 w-4" /> Leaderborad
                         </Button>
                     </div>
                 </Card>
