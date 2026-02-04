@@ -9,7 +9,6 @@ export function LandingPage() {
     const navigate = useNavigate()
     return (
         <div className="relative min-h-screen bg-background text-foreground overflow-hidden">
-
             {/* Background Decor: Dot Pattern & Gradients */}
             <div className="absolute inset-0 -z-10 h-full w-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-size-[14px_24px]"></div>
             <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-77.5 w-77.5 rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
@@ -86,8 +85,8 @@ export function LandingPage() {
                                 icon: Trophy,
                                 color: "text-amber-500",
                                 bg: "bg-amber-500/10",
-                                title: "Instant Analytics",
-                                desc: "Get a detailed breakdown of your strengths and weaknesses instantly.",
+                                title: "Leaderboard",
+                                desc: "See your ranking in real time and compete with other players to climb the leaderboard.",
                             },
                         ].map((item, index) => (
                             <Card
@@ -119,14 +118,28 @@ export function LandingPage() {
                         <div className="absolute left-1/2 top-0 bottom-0 hidden w-px bg-linear-to-b from-transparent via-muted-foreground/30 to-transparent md:block" />
 
                         {[
-                            "Create your free account",
-                            "Select your favorite topic",
-                            "Challenge the clock",
-                            "Climb the global ranks",
+                            {
+                                title: "Create your free account",
+                                desc: "Sign up in seconds."
+                            },
+                            {
+                                title: "Choose a quiz topic",
+                                desc: "Pick from multiple topics that interest you."
+                            },
+                            {
+                                title: "Answer questions",
+                                desc: "Test your knowledge with questions."
+                            },
+                            {
+                                title: "Check the leaderboard",
+                                desc: "See how you compare with others."
+                            },
                         ].map((step, index) => (
                             <div
-                                key={step}
-                                className={`relative flex items-center gap-6 rounded-2xl border bg-card p-6 shadow-sm transition-all hover:shadow-md ${index % 2 === 0 ? "md:mr-12 md:text-right md:flex-row-reverse" : "md:ml-12"
+                                key={step.title}
+                                className={`relative flex items-center gap-6 rounded-2xl border bg-card p-6 shadow-sm transition-all hover:shadow-md ${index % 2 === 0
+                                    ? "md:mr-12 md:text-right md:flex-row-reverse"
+                                    : "md:ml-12"
                                     }`}
                             >
                                 {/* Number Badge */}
@@ -134,12 +147,15 @@ export function LandingPage() {
                                     {index + 1}
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-lg">{step}</h3>
-                                    <p className="text-sm text-muted-foreground mt-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    <h3 className="font-semibold text-lg">{step.title}</h3>
+                                    <p className="text-sm text-muted-foreground mt-1">
+                                        {step.desc}
+                                    </p>
                                 </div>
                             </div>
                         ))}
                     </div>
+
                 </section>
 
                 {/* CTA SECTION */}
@@ -153,14 +169,32 @@ export function LandingPage() {
                             Ready to prove your smarts?
                         </h2>
                         <p className="mx-auto max-w-lg text-primary-foreground/80 text-lg">
-                            Join thousands of quiz enthusiasts and start climbing the leaderboard today.
+                            Join multiple quiz enthusiasts and start climbing the leaderboard today.
                         </p>
 
-                        <SignInButton mode="modal" forceRedirectUrl="/quiz">
-                            <Button size="lg" variant="secondary" className="h-12 px-8 font-semibold text-primary shadow-lg hover:bg-white/90">
+                        <SignedIn>
+                            <Button
+                                size="lg"
+                                variant="secondary"
+                                className="h-12 px-8 font-semibold text-primary shadow-lg hover:bg-white/90"
+                                onClick={() => navigate('/quiz')}
+                            >
                                 Start Quizzing Now
                             </Button>
-                        </SignInButton>
+                        </SignedIn>
+
+                        {/* User not logged in → open sign-in modal */}
+                        <SignedOut>
+                            <SignInButton mode="modal" forceRedirectUrl="/quiz">
+                                <Button
+                                    size="lg"
+                                    variant="secondary"
+                                    className="h-12 px-8 font-semibold text-primary shadow-lg hover:bg-white/90"
+                                >
+                                    Start Quizzing Now
+                                </Button>
+                            </SignInButton>
+                        </SignedOut>
 
                         <div className="flex justify-center gap-8 pt-4 text-sm font-medium text-primary-foreground/60">
                             <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> No credit card</div>
@@ -168,9 +202,6 @@ export function LandingPage() {
                         </div>
                     </div>
                 </section>
-
-                {/* FOOTER SPACER */}
-                <div className="h-12"></div>
             </div>
         </div>
     )
