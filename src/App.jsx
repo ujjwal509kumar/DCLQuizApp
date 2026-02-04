@@ -5,7 +5,9 @@ import { LandingPage } from './components/LandingPage'
 import { QuizPage } from './components/QuizPage'
 import { LeaderboardProtected } from './components/LeaderboardProtected'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import { AboutPage } from './components/AboutPage'
 import './App.css'
+import { Footer } from './components/Footer'
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
             <Route path="/leaderboard" element={<LeaderboardProtected />} />
+            <Route path="/about" element={<AboutPage />} />
           </Routes>
+          <Footer/>
         </div>
       </Router>
     </ThemeProvider>
